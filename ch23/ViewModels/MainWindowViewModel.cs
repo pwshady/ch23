@@ -1,9 +1,12 @@
-﻿using ch23.ViewModels.Base;
+﻿using ch23.Infrastructure.Commands;
+using ch23.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ch23.ViewModels
 {
@@ -26,6 +29,35 @@ namespace ch23.ViewModels
             } 
         }
         #endregion
+
+        #region Commands
+
+        #region CloseApplicationCommand
+
+        public ICommand CloseApplicationCommand {  get; }
+
+        private void OnCloseApplicationCommandExecuted(object o)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private bool CanCloseApplicationCommandExecute(object o) 
+        { 
+            return true;
+        }
+
+        #endregion
+
+        #endregion
+
+        public MainWindowViewModel() 
+        {
+            #region Commands
+
+            CloseApplicationCommand = new RelatedCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            #endregion
+        }
 
     }
 }

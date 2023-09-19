@@ -4,13 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ch23.ViewModels"
+        xmlns:cmd="clr-namespace:ch23.Infrastructure.Commands"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:ch23"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="550" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBox Margin="36,30,644,387" Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120"/>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <!--<MenuItem Header="Exit" Command="{Binding Path=CloseApplicationCommand}"></MenuItem>-->
+                <MenuItem Header="Exit">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="12345"/>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Regular_File" Height="13"/>
+                        <TextBlock Text="Tab11"></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Header="Tab2">
+                
+            </TabItem>
+        </TabControl>
+
+    </DockPanel>
 </Window>
